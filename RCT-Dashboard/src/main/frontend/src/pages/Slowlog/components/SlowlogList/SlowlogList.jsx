@@ -260,6 +260,12 @@ export default class SlowlogList extends Component {
                 sortable
               />
               <Table.Column
+                title="Client Ip Port"
+                dataIndex="clientIpPort"
+                width={60}
+                sortable
+              />
+              <Table.Column
                 title="Type"
                 dataIndex="type"
                 width={60}
