@@ -18,6 +18,12 @@ RCT (Redis 内存分析工具)
 - 通用组件: `src/components`
 - 页面文件: `src/pages`
 
+## 组件
+
+- [icejs](https://ice.work/docs/guide/basic/component)
+- [ahooks](https://ahooks.js.org/zh-CN/hooks/use-fusion-table)
+- [Table](https://fusion.design/pc/component/table?themeid=2#Table)
+
 ## 配色
 
 - 主色：#5e83fb
