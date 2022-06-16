@@ -1,7 +1,6 @@
 package org.nesc.ecbd.service;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,6 +78,7 @@ public class SlowlogCollectorSchedule {
         	 return;
         }           
         Set<JSONObject> documents = new HashSet<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (String key : mapSlowlog.keySet()) {
             List<Slowlog> slowlogs = mapSlowlog.get(key);
             String host = key.split(":")[0];
@@ -99,7 +99,7 @@ public class SlowlogCollectorSchedule {
                 // 改为毫秒级别 TimeStamp
                 long timestamp = slowlog.getTimeStamp() * 1000;
                 json.put("TimeStamp", timestamp);
-                json.put("DateTime", Instant.ofEpochMilli(timestamp).toString());
+                json.put("DateTime", dateFormat.format(new Date(timestamp)));
                 // 构建唯一ID，防止数据写入多次
                 json.put("id", String.format("%s:%s-%d", host, port, slowlog.getId()));
                 List<String> args = slowlog.getArgs();
@@ -118,8 +118,11 @@ public class SlowlogCollectorSchedule {
             }
         }
       //  System.out.println("documents:"+documents.size());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String index = initConfig.getSlowlogIndexName() + "-" + sdf.format(new Date());
+        String index = initConfig.getSlowlogIndexName();
+        if (StringUtils.isNotBlank(initConfig.getSlowlogIndexNameSuffix())) {
+            SimpleDateFormat sdf = new SimpleDateFormat(initConfig.getSlowlogIndexNameSuffix());
+            index = index + sdf.format(new Date());
+        }
         try {
             if (documents.size() <= 0) {
             	  return;

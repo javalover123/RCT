@@ -20,6 +20,9 @@ public class InitConfig {
 	@Value("${rct.elasticsearch.slowlog.index:''}")
 	private String slowlogIndexName;
 
+	@Value("${rct.elasticsearch.slowlog.indexSuffix:''}")
+	private String slowlogIndexNameSuffix;
+
 	@Value("${rct.elasticsearch.client-list.index:''}")
 	private String clientIndex;
 	@Value("${rct.elasticsearch.enable:false}")
@@ -59,7 +62,15 @@ public class InitConfig {
 	public void setSlowlogIndexName(String slowlogIndexName) {
 		this.slowlogIndexName = slowlogIndexName;
 	}
-    
+
+	public String getSlowlogIndexNameSuffix() {
+		return slowlogIndexNameSuffix;
+	}
+
+	public void setSlowlogIndexNameSuffix(String slowlogIndexNameSuffix) {
+		this.slowlogIndexNameSuffix = slowlogIndexNameSuffix;
+	}
+
 
 	public boolean isElasticsearchEnable() {
 		return elasticsearchEnable;
