@@ -104,7 +104,8 @@ export default class SlowlogList extends Component {
     this.changeLoading();
     const dataSource = [];
     data.map((a) => {
-      if (a.SlowDate.toLowerCase().search(value.toLowerCase()) !== -1 || a.runTime.toLowerCase().search(value.toLowerCase()) !== -1 ||
+      if (a.SlowDate.toLowerCase().search(value.toLowerCase()) !== -1 || (a.runTime + "").search(value.toLowerCase()) !== -1 ||
+        a.clientIpPort.toLowerCase().search(value.toLowerCase()) !== -1 || a.clientName.toLowerCase().search(value.toLowerCase()) !== -1 ||
         a.type.toLowerCase().search(value.toLowerCase()) !== -1 || a.command.toLowerCase().search(value.toLowerCase()) !== -1) {
         dataSource.push(a);
       }
@@ -178,7 +179,8 @@ export default class SlowlogList extends Component {
   onSort(value, order) {
     this.changeLoading();
     let dataSource = [];
-    if ((typeof value) !== 'number') {
+    let fieldValue = this.state.totalData.length ? this.state.totalData[0][value] : value;
+    if ((typeof fieldValue) !== 'number') {
       dataSource = this.state.totalData.sort((a, b) => {
         if (order === 'asc') {
           return a[value].localeCompare(b[value]);

@@ -171,7 +171,7 @@ public class SlowlogService {
 				maps.put("SlowDate", sdf.format(date));
 				maps.put("type", slow.getArgs().get(0));
 				maps.put("command", slow.getArgs().toString());
-				maps.put("runTime", String.valueOf(slow.getExecutionTime()));
+				maps.put("runTime", slow.getExecutionTime());
 				maps.put("clientIpPort", slow.getClientIpPort().toString());
 				maps.put("clientName", slow.getClientName());
 				results.add(maps);

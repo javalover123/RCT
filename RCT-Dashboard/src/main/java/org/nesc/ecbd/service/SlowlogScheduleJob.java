@@ -26,6 +26,6 @@ public class SlowlogScheduleJob implements Job {
 		SlowlogEntity entity = (SlowlogEntity) context.getJobDetail().getJobDataMap().get("slowscheduleJob");
 		RedisInfo redisInfo = redisInfoService.selectById(entity.getPid());
 		slowlogCollectorSchedulel.slowlogs(redisInfo);
-		LOG.info("slowlog schedule is execute cron success,message:{}", entity.getSchedule());
+		LOG.info("slowlog schedule is execute cron success,message:{}", redisInfo.getName());
 	}
 }
