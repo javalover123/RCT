@@ -109,7 +109,7 @@ public class SlowlogCollectorSchedule {
                     json.put("Args", JSONObject.toJSONString(args));
                 }
                 json.put("SendTime", SendTime);
-                json.put("clientIpPort", slowlog.getClientIpPort());
+                json.put("clientIpPort", slowlog.getClientIpPort().toString());
                 json.put("clientName", slowlog.getClientName());
                 documents.add(json);
             }
