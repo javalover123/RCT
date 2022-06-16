@@ -38,7 +38,7 @@ export default class SlowlogList extends Component {
       pageSize: 0,
       deafultPage: 1,
       loading: false,
-      pageList: [10, 50, 100],
+      pageList: [10, 50, 100, 200],
       pid,
 
     };
@@ -202,7 +202,7 @@ export default class SlowlogList extends Component {
   render() {
     if (this.state.pageSize === 0) {
       this.setState({
-        pageSize: 10,
+        pageSize: 200,
       });
     }
     return (

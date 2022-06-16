@@ -1,6 +1,7 @@
 package org.nesc.ecbd.service;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -95,9 +96,12 @@ public class SlowlogCollectorSchedule {
                 json.put("ClusterName", clusterName);
                 json.put("RedisInstance", key);
                 json.put("ExecutionTime", slowlog.getExecutionTime());
-                json.put("TimeStamp", slowlog.getTimeStamp() * 1000); // 改为毫秒级别 TimeStamp
+                // 改为毫秒级别 TimeStamp
+                long timestamp = slowlog.getTimeStamp() * 1000;
+                json.put("TimeStamp", timestamp);
+                json.put("DateTime", Instant.ofEpochMilli(timestamp).toString());
                 // 构建唯一ID，防止数据写入多次
-                json.put("id", host + port + slowlog.getId());
+                json.put("id", String.format("%s:%s-%d", host, port, slowlog.getId()));
                 List<String> args = slowlog.getArgs();
                 if (args != null && args.size() > 1) {
                     json.put("Command", args.get(0));
