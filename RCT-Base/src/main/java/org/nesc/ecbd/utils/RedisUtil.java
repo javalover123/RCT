@@ -50,7 +50,8 @@ public class RedisUtil implements Closeable {
 
 	public boolean clusterEnabled() {
 		String info = jedis.info("cluster");
-		if(StringUtils.isBlank(info)) {
+		info = info.lines().filter(l -> l.contains("cluster_enabled:")).findFirst().orElse("");
+		if (StringUtils.isBlank(info)) {
 			return false;
 		}
 		String str = info.split(":")[1];
