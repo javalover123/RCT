@@ -77,7 +77,7 @@ public class ElasticSearchUtil {
 			tempUrl[arrUrl.length - 1] = arrUrl[0];
 			arrUrl = tempUrl;
 		} else {
-			arrUrl = new String[0];
+			// arrUrl = new String[0];
 		}
 	}
 
